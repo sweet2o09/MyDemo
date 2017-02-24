@@ -1,0 +1,2 @@
+include ':app', ':utilcode'
+project(':utilcode').projectDir = new File('library/utilcode')

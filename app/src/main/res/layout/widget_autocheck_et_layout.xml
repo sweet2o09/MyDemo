@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+TextInputLayout:
+    app:hintEnabled="true"//设置是否可以使用hint属性，默认是true
+    app:hintAnimationEnabled="true"//设置是否可以使用动画，默认是true
+    app:hintTextAppearance="@style/hintAppearance"//设置hint的文本属性，改变hint文字的大小颜色等属性
+    app:counterEnabled="true"//设置是否可以开启计数器，默认是false
+    app:counterOverflowTextAppearance="@style/counterOverflowTextAppearance"//设置计算器越位后的文字颜色和大小
+    app:counterTextAppearance="@style/hintAppearance"//设置正常情况下的计数器文字颜色和大小
+    app:counterMaxLength="11"//设置计算器的最大字数限制
+    app:errorEnabled="true"//是否允许错误提示，默认是true
+    app:errorTextAppearance="@style/errorAppearance"//错误提示的文字大小和颜色
+    app:passwordToggleEnabled="true"//设置是否显示密码眼睛,默认是false
+    app:passwordToggleDrawable="@mipmap/ic_launcher"//自定义眼睛图标
+    app:passwordToggleTint="@color/colorAccent"//给眼睛着色
+    app:passwordToggleTintMode="multiply"//选择着色模式,与passwordToggleTint一起用
+-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/widget_textinput_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/TextInputLayoutLineColor"
+        app:counterEnabled="true"
+        app:counterMaxLength="11"
+        app:counterOverflowTextAppearance="@style/counterOverflowTextAppearance"
+        app:errorTextAppearance="@style/errorAppearance"
+        app:hintTextAppearance="@style/hintAppearance">
+
+        <com.caihan.mydemo.widget.edittext.AutoCheckEditText
+            android:id="@+id/widget_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/v2_et_del_image"
+            android:drawableStart="@drawable/v2_register_phone"
+            android:hint="请输入用户名"
+            android:imeOptions="actionNext"
+            android:inputType="number"
+            android:singleLine="true"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/widget_textinput_layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/TextInputLayoutLineColor"
+        app:counterEnabled="true"
+        app:counterMaxLength="11"
+        app:counterOverflowTextAppearance="@style/counterOverflowTextAppearance"
+        app:errorTextAppearance="@style/errorAppearance"
+        app:hintTextAppearance="@style/hintAppearance"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/colorAccent">
+
+        <com.caihan.mydemo.widget.edittext.AutoCheckEditText
+            android:id="@+id/widget_et2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/v2_login_pwd"
+            android:hint="请输入密码"
+            android:imeOptions="actionDone"
+            android:inputType="textPassword"
+            android:singleLine="true"/>
+    </android.support.design.widget.TextInputLayout>
+</LinearLayout>

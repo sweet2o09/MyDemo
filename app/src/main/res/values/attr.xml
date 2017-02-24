@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--圆形Loading-->
+    <declare-styleable name="CircularProgress">
+        <attr name="borderWidth" format="dimension"/>
+    </declare-styleable>
+
+    <!--CoordinatorLayout的Behavior-->
+    <declare-styleable name="Follow">
+        <attr name="target" format="reference"/>
+        <attr name="scroll_axis" format="integer"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:background="@android:color/white"
+              android:gravity="center"
+              android:orientation="vertical"
+              android:padding="16dp">
+
+    <com.caihan.mydemo.widget.CircularProgress
+        android:id="@+id/loading_progressBar"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:indeterminate="false"/>
+
+    <TextView
+        android:id="@+id/text_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:text="加载中,请稍后..."
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+</LinearLayout>

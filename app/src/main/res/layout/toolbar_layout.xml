@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--app:popupTheme自定义我们弹出的菜单的样式-->
+<!--app:theme自定义Toolbar的样式-->
+<android.support.v7.widget.Toolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/toolbar"
+    style="@style/MyToolBar"
+    app:popupTheme="@style/MyToolBar.PopupTheme"
+    app:theme="@style/MyToolBar.theme">
+
+    <!--textStyle设置字形[bold(粗体) 0, italic(斜体) 1, bolditalic(又粗又斜) 2]
+    可以设置一个或多个，用“|”隔开-->
+    <TextView
+        android:id="@+id/toolbar_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+</android.support.v7.widget.Toolbar>

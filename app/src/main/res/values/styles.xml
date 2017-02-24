@@ -1,0 +1,149 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <!--Appbar背景色-->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--状态栏颜色-->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!--控制各个控件被选中时的颜色,Dialog按钮颜色-->
+        <item name="colorAccent">@color/main_color</item>
+        <!--自定义AlertDialog-->
+        <item name="alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert.Self</item>
+        <item name="android:alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert.Self</item>
+        <!--actionbar上Menu的文字颜色-->
+        <item name="android:actionMenuTextColor">@android:color/white</item>
+        <!--colorControlNormal 设置返回键的颜色-->
+        <item name="colorControlNormal">@android:color/white</item>
+    </style>
+
+    <style name="Theme.AppCompat.Light.Dialog.Alert.Self"
+           parent="@style/Theme.AppCompat.Light.Dialog.Alert">
+        <!--修改AlertDialog按钮的颜色-->
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="BaseAppTheme.NoActionBar" parent="BaseAppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="BaseAppTheme.SplashTheme" parent="BaseAppTheme.NoActionBar">
+        <item name="android:windowBackground">@drawable/loading</item>
+        <!--全屏模式-->
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme" parent="BaseAppTheme"/>
+
+    <style name="AppTheme.NoActionBar" parent="BaseAppTheme.NoActionBar"/>
+
+    <!-- 防止欢迎页白屏或者黑屏，设置图片 -->
+    <style name="AppTheme.SplashTheme" parent="BaseAppTheme.SplashTheme"/>
+    <!--在Android 4.4之前的版本上运行，直接跟随系统主题-->
+    <style name="AppTheme.ImageTranslucentTheme" parent="BaseAppTheme.SplashTheme"/>
+
+    <style name="AppTheme.ColorTranslucentTheme" parent="BaseAppTheme.SplashTheme"/>
+
+    <!--toolbar的主題 Start-->
+    <style name="MyToolBar" parent="Theme.AppCompat.Light">
+        <!-- <item name="android:windowTranslucentStatus">true</item> -->
+        <item name="android:background">@color/main_color</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?android:attr/actionBarSize</item>
+    </style>
+
+    <style name="MyToolBar.theme" parent="MyToolBar">
+        <item name="android:actionBarSize">?android:attr/actionBarSize</item>
+        <!--colorControlNormal 设置返回键的颜色-->
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="actionMenuTextColor">@android:color/white</item>
+    </style>
+
+
+    <style name="MyToolBar.PopupTheme" parent="ThemeOverlay.AppCompat.Light">
+        <!-- <item name="android:windowTranslucentStatus">true</item> -->
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="actionMenuTextColor">@android:color/white</item>
+    </style>
+    <!--toolbar的主題 End-->
+
+    <!--tabLayout的主題 Start-->
+    <style name="MyTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">?attr/colorAccent</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabMode">fixed</item>
+        <item name="tabTextAppearance">@style/MyTabTextAppearance.image</item>
+        <item name="tabSelectedTextColor">@color/main_color</item>
+    </style>
+
+    <style name="MyTabTextAppearance" parent="TextAppearance.Design.Tab"/>
+
+    <!--不包含图片的tab textAllCaps = true-->
+    <style name="MyTabTextAppearance.text" parent="MyTabTextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#757575</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <!--包含图片的tab-->
+    <style name="MyTabTextAppearance.image" parent="MyTabTextAppearance">
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="MyTabLayout.indicatorHeight0" parent="MyTabLayout">
+        <item name="tabIndicatorHeight">0dp</item>
+    </style>
+
+    <style name="MyTabLayout.indicatorHeight6px" parent="MyTabLayout">
+        <item name="tabIndicatorHeight">6px</item>
+    </style>
+    <!--tabLayout的主題 End-->
+
+    <!--EditText的主題 Start-->
+    <style name="TextInputLayoutLineColor" parent="Theme.AppCompat.Light">
+        <!--没有获取焦点时的颜色-->
+        <item name="colorControlNormal">@color/colorAccent</item>
+        <!--获取焦点时的颜色-->
+        <item name="colorControlActivated">@color/main_color</item>
+    </style>
+
+    <!--浮动标签-->
+    <style name="hintAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <!--错误提示信息-->
+    <style name="errorAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/holo_red_light</item>
+    </style>
+
+    <!--超出计数最大长度,浮动标签,下划线,计数文字都会改变颜色-->
+    <style name="counterOverflowTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+    </style>
+    <!--EditText的主題 End-->
+
+    <!--Dialog的主題 Start-->
+    <style name="BaseDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">adjustPan</item>
+    </style>
+
+    <style name="MyDialog" parent="BaseDialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    <!--Dialog的主題 End-->
+</resources>

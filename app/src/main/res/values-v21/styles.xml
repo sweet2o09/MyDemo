@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="BaseAppTheme">
+        <!-- Customize your theme here. -->
+        <!--底部导航栏颜色-->
+        <item name="android:navigationBarColor">@android:color/black</item>
+        <!--各个控制控件的默认颜色-->
+        <item name="android:colorControlNormal">@color/main_color</item>
+        <!--状态栏透明-->
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="BaseAppTheme.NoActionBar">
+        <!--状态栏透明-->
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <!-- 防止欢迎页白屏或者黑屏，设置图片 -->
+    <style name="AppTheme.SplashTheme" parent="BaseAppTheme.SplashTheme">
+        <!--状态栏透明-->
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="AppTheme.ImageTranslucentTheme" parent="BaseAppTheme.SplashTheme">
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <!--Android 5.x开始需要把颜色设置透明，否则导航栏会呈现系统默认的浅灰色-->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.ColorTranslucentTheme" parent="BaseAppTheme.SplashTheme">
+        <item name="android:windowTranslucentStatus">false</item>
+        <!--有的手机有虚拟按键,所以要把windowTranslucentNavigation设置成false,不然会一起变色-->
+        <item name="android:windowTranslucentNavigation">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="MyToolBar.theme" parent="MyToolBar">
+        <!--各个控制控件的默认颜色-->
+        <item name="android:colorControlNormal">@android:color/white</item>
+    </style>
+</resources>

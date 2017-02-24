@@ -1,0 +1,175 @@
+apply plugin: 'com.android.application'
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+//获取时间戳
+def releaseTime() {
+    return new Date().format('MMddHHmm')
+}
+
+android {
+
+    productFlavors {
+        xiaomi {}
+        wandoujia {}
+        productFlavors.all { flavor ->
+            flavor.manifestPlaceholders = [
+                    UMENG_CHANNEL_VALUE       : name,
+                    UMENG_APPKEY_VALUE        : properties.getProperty("UMENG_APPKEY_VALUE"),
+                    UMENG_MESSAGE_SECRET_VALUE: properties.getProperty("UMENG_MESSAGE_SECRET_VALUE")
+            ]
+        }
+    }
+
+    signingConfigs {
+        releaseConfig {
+            storeFile file(properties.getProperty("RELEASE_STORE_FILE"))
+            storePassword properties.getProperty("RELEASE_STORE_PASSWORD")
+            keyAlias properties.getProperty("RELEASE_KEY_ALIAS")
+            keyPassword properties.getProperty("RELEASE_KEY_PASSWORD")
+        }
+    }
+
+    compileSdkVersion 25
+    buildToolsVersion "25.0.2"
+    defaultConfig {
+        //当前应用包名
+        applicationId "com.caihan.mydemo"
+        //支持的最低版本
+        minSdkVersion 19
+        //支持的目标版本
+        targetSdkVersion 24
+        //版本号
+        versionCode 1
+        //版本名
+        versionName "1.0"
+        // dex突破65535的限制
+        multiDexEnabled true
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                //EventBus
+                arguments = [eventBusIndex: 'org.greenrobot.eventbusperf.MyEventBusIndex']
+            }
+        }
+    }
+    buildTypes {
+        //配置编译类型，比如具体可以配置怎么混淆等
+        release {
+            // 不显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            minifyEnabled false //设置混淆
+            shrinkResources false// 移除无用的resource文件,AS2.2已经包含
+            zipAlignEnabled true//Zipalign优化
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            signingConfig signingConfigs.releaseConfig
+        }
+        debug {
+            // 显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+//            signingConfig signingConfigs.releaseConfig
+        }
+    }
+
+    sourceSets {
+        main {
+//            manifest.srcFile 'src/main/AndroidManifest.xml'
+//            java.srcDirs = ['src']
+//            resources.srcDirs = ['src']
+//            aidl.srcDirs = ['src']
+//            renderscript.srcDirs = ['src']
+//            res.srcDirs = ['src/main/res']
+//            assets.srcDirs = ['assets']
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    lintOptions {
+        abortOnError false//执行lint检查，有任何的错误或者警告提示，都会终止构建，我们可以将其关掉。
+        disable 'MissingTranslation'// 防止在发布的时候出现因MissingTranslation导致Build Failed!
+    }
+
+    //修改生成的apk名字
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def oldFile = output.outputFile
+            def releaseApkName = ''
+            if (variant.buildType.name.equals('release')) {
+//                println(variant.productFlavors[0].name)
+                if (variant.productFlavors[0] != null) {
+                    releaseApkName = 'my-' + variant.productFlavors[0].name + '-v' + versionName + '-' + releaseTime() + '.apk'
+                } else {
+                    releaseApkName = 'my-v' + versionName + '-' + releaseTime() + '.apk'
+                }
+                output.outputFile = new File(oldFile.parent, releaseApkName)
+            }
+            if (variant.buildType.name.equals('debug')) {
+
+            }
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:support-annotations:25.1.0'
+    compile 'com.android.support:support-v4:25.1.0'
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:design:25.1.0'
+    compile 'com.android.support:cardview-v7:25.1.0'
+    compile 'com.android.support:recyclerview-v7:25.1.0'
+
+    //JakeWharton 黄油刀,减少findbuyId
+    compile 'com.jakewharton:butterknife:8.4.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
+
+    //JakeWharton 动效
+    compile 'com.nineoldandroids:library:2.4.0'
+
+    //EventBus代替Intent,Handler,广播等
+    compile 'org.greenrobot:eventbus:3.0.0'
+    annotationProcessor 'org.greenrobot:eventbus-annotation-processor:3.0.1'
+
+    //下拉刷新android-Ultra-Pull-To-Refresh
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
+    compile 'in.srain.cube:cube-sdk:1.0.44.39-SNAPSHOT@aar'
+
+    //BRVAH
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.7.9'
+
+    //阿里JSON
+    compile 'com.alibaba:fastjson:1.1.55.android'
+
+    //自升级
+    compile('com.dou361.update:jjdxm-update:1.0.7') {
+        exclude group: 'com.android.support', module: 'support-v4'
+    }
+
+    //工具类
+    compile project(':utilcode')
+
+    //全新网络请求框架Rxjava+RxAndroid+ReTrofit2+okHttp3
+//    compile 'com.tamic.novate:novate:1.2.7'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    //网络日志拦截器
+    compile 'com.squareup.okhttp3:logging-interceptor:3.5.0'
+    //    compile 'io.reactivex:rxjava:1.2.4'
+    //    compile 'io.reactivex:rxandroid:1.2.1'
+    //    compile 'io.reactivex.rxjava2:rxjava:2.0.2'
+    //    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'org.ligboy.retrofit2:converter-fastjson-android:2.1.0'
+    //RxBinding
+    compile 'com.jakewharton.rxbinding:rxbinding:1.0.0'
+    //    compile 'com.jakewharton.rxbinding:rxbinding-support-v4:1.0.0'
+    //    compile 'com.jakewharton.rxbinding:rxbinding-appcompat-v7:1.0.0'
+    //    compile 'com.jakewharton.rxbinding:rxbinding-design:1.0.0'
+    //    compile 'com.jakewharton.rxbinding:rxbinding-recyclerview-v7:1.0.0'
+
+    //FlycoDialog,用于loading,警告,再次确认等弹窗
+    compile 'com.flyco.dialog:FlycoDialog_Lib:1.3.2@aar'
+}
